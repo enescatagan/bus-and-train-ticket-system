@@ -73,7 +73,23 @@ input, select, textarea {
 }
 
 /* Basic */
+.bus-seat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Adjust the number of columns as per your bus layout */
+  grid-gap: 10px; /* Adjust the spacing between seats */
+	width: fit-content;
+	height: fit-content;
+}
 
+	.seat{
+		display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	width: 50px;
+  	height: 50px;
+ 	  border-radius: 5px;
+  	cursor: pointer;
+	}
 	html {
 		box-sizing: border-box;
 	}

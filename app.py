@@ -42,6 +42,10 @@ def tren():
 def tren_biletleri():
     return render_template("tren_biletleri.html", train_tickets=train_tickets)
 
+@app.route('/bus_seats')
+def show_bus_seat_grid():
+    return render_template('bus_seats.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
