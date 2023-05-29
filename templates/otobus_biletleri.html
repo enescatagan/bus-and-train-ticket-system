@@ -13,11 +13,18 @@
                     <article class="excerpt">
                         <a href="#" class="image left"><img src="static/images/pic04.jpg" alt="" /></a>
                         <div>
-                            <header>                                
+                            <header>
                                 <span class="date">{{ ticket.date }}</span>
                                 <span> <b> {{ ticket.departure.title() }} - {{ ticket.destination.title() }} </b></span>
-                                <h3><a href="#">{{ ticket.company.title() }}<span>-- {{ ticket.fee }}</span></a></h3>    
+                                <h3><a href="#">{{ ticket.company.title() }}<span>-- {{ ticket.fee }}</span></a></h3>
                             </header>
+                                <form method="POST">
+                                    <select name="seat">
+                                        {% for seat in ticket.seats%}
+                                        <option value="{{ seat }}">{{ seat }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </form>
                             <a class="button alt">Koltuk Seç</a>
                         </div>
                     </article>
