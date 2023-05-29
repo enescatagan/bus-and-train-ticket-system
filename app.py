@@ -3,10 +3,11 @@ import requests
 from bus import Bus
 from train import Train
 
-bus_json = requests.get("https://api.npoint.io/3a22c5b61aa1f46639cb").json()
+#bus data without seats https://api.npoint.io/3a22c5b61aa1f46639cb
+bus_json = requests.get("https://api.npoint.io/6bf62bd3840119596101").json()
 bus_tickets = []
 for bus_ticket in bus_json:
-    bus_tick_obj = Bus(bus_ticket["id"], bus_ticket["company"], bus_ticket["departure"], bus_ticket["destination"], bus_ticket["date"], bus_ticket["time"], bus_ticket["fee"])
+    bus_tick_obj = Bus(bus_ticket["id"], bus_ticket["company"], bus_ticket["departure"], bus_ticket["destination"], bus_ticket["date"], bus_ticket["time"], bus_ticket["fee"], bus_ticket["seats"])
     bus_tickets.append(bus_tick_obj)
 
 tren_json = requests.get("https://api.npoint.io/6d3c5a8f8064dfbd6be3").json()
