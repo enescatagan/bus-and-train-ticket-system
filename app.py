@@ -42,9 +42,13 @@ def tren():
 def tren_biletleri():
     return render_template("tren_biletleri.html", train_tickets=train_tickets)
 
-@app.route('/bus_seats')
-def show_bus_seat_grid():
-    return render_template('bus_seats.html')
+@app.route('/bus_seats/<int:index>')
+def show_bus_seat_grid(index):
+    requested_ticket = None
+    for bus_ticket in bus_tickets:
+        if bus_ticket.id == index:
+            requested_ticket = bus_ticket
+    return render_template("bus_seats.html", ticket=requested_ticket)
 
 
 if __name__ == "__main__":
