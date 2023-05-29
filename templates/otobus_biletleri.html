@@ -13,35 +13,11 @@
                         <a href="#" class="image left"><img src="static/images/pic04.jpg" alt="" /></a>
                         <div>
                             <header>
-                                <span class="date">15:00</span>
-                                <span> <b> İzmir - İstanbul </b></span>
-                                <h3><a href="#">Pamukkale Turizm <span>-- 350 TL</span></a></h3>
-                            </header>
-                            <a class="button alt">Koltuk Seç</a>
-                        </div>
-                    </article>
-
-                    <!-- Excerpt -->
-                    <article class="excerpt">
-                        <a href="#" class="image left"><img src="static/images/pic05.jpg" alt="" /></a>
-                        <div>
-                            <header>
-                                <span class="date">18:00</span>
-                                <span> <b> İzmir - İstanbul </b></span>
-                                <h3><a href="#">Metro Turizm<span>-- 380 TL</span></a></h3>
-                            </header>
-                            <a class="button alt">Koltuk Seç</a>
-                        </div>
-                    </article>
-
-                    <!-- Excerpt -->
-                    <article class="excerpt">
-                        <a href="#" class="image left"><img src="static/images/pic06.jpg" alt="" /></a>
-                        <div>
-                            <header>
-                                <span class="date">19:00</span>
-                                <span> <b> İzmir - İstanbul </b></span>
-                                <h3><a href="#">Nilüfer Turizm<span>-- 400 TL</span></a></h3>
+                                {% for ticket in otobus_tickets %}
+                                <span class="date">{{ ticket.date }}</span>
+                                <span> <b> {{ ticket.departure.title() }} - {{ ticket.destination.title() }} </b></span>
+                                <h3><a href="#">{{ ticket.company.title() }}<span>-- {{ ticket.fee }}</span></a></h3>
+                                {% endfor %}
                             </header>
                             <a class="button alt">Koltuk Seç</a>
                         </div>
