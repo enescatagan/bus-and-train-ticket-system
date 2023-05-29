@@ -1,6 +1,6 @@
 class Bus():
     """Bus Tickets"""
-    def __init__(self, id, company, departure, destination, date, time, fee) -> None:
+    def __init__(self, id, company, departure, destination, date, time, fee, seat_no) -> None:
       self.id = id
       self.company = company
       self.departure = departure
@@ -8,4 +8,5 @@ class Bus():
       self.date = date
       self.time = time
       self.fee = fee
+      self.seat_no = seat_no
         
