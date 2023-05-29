@@ -38,6 +38,11 @@
 
 </style>
 
+{% include "header.html" %}
+
+<div class="wrapper style3">
+    <div class="inner">
+        <div class="container">
 <form method="POST">
   <select name="seat">
     <option value="">Boş Koltuklar</option>
@@ -56,3 +61,8 @@
   {% endif %}
   {% endfor %}
 </div>
+        </div>
+    </div>
+</div>
+
+{% include "footer.html" %}
