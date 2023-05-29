@@ -50,6 +50,14 @@ def show_bus_seat_grid(index):
             requested_ticket = bus_ticket
     return render_template("bus_seats.html", ticket=requested_ticket)
 
+@app.route('/tren_seats/<int:index>')
+def show_tren_seat_grid(index):
+    requested_ticket = None
+    for tren_ticket in train_tickets:
+        if tren_ticket.id == index:
+            requested_ticket = tren_ticket
+    return render_template("tren_seats.html", ticket=requested_ticket)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

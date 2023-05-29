@@ -18,20 +18,8 @@
                                 <span> <b> {{ ticket.departure.title() }} - {{ ticket.destination.title() }} </b></span>
                                 <h3><a href="#">{{ ticket.company.title() }}<span>-- {{ ticket.fee }}</span></a></h3>
                             </header>
-                            <!--
-                                <form method="POST">
-                                    <select name="seat">
-                                        {% for seat in ticket.seats%}
-                                        <option value="{{ seat }}">{{ seat }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </form>
-                            -->
                             <a href="{{ url_for('show_bus_seat_grid', index=ticket.id) }}" class="button alt">Koltuk Seç</a>
-                        </div>
-                        
-                        <!--{% include "bus_seats.html" %} -->
-                        
+                        </div>                        
                     </article>
                     {% endfor %}
                 </section>

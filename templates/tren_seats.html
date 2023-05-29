@@ -1,0 +1,65 @@
+<style>
+    .tren-seat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      /* Adjust the number of columns as per your bus layout */
+      grid-gap: 10px;
+      /* Adjust the spacing between seats */
+      width: fit-content;
+      height: fit-content;
+    }
+  
+    .seat {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: aqua;
+    }
+  
+    .active-seat {
+      background-color: #4CAF50;
+      color: #ffffff;
+      outline: none; 
+    }
+  
+    .active-button:active {
+      background-color: #3D8D40;
+    }
+  
+    .inactive-seat {
+      background-color: #dddddd;
+      color: #333333;
+      pointer-events: none;
+    }  
+  </style>
+
+<form method="POST">
+    <select name="seat">
+        <option value="">Vagonlar</option>
+        {% for compartment in ticket.compartments%}
+        <option value="{{ compartment }}">{{ compartment }}</option>
+        {% endfor %}
+    </select>
+</form>
+<form method="POST">
+    <select name="seat">
+        <option value="">Boş Koltuklar</option>
+        {% for seat in ticket.seats %}
+        <option value="{{ seat }}">{{ seat }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<div class="tren-seat-grid">
+    {% for seat in range(1, 52) %}
+    {% if seat not in ticket.seats %}
+    <button class="seat inactive-seat"> {{ seat }} </button>
+    {% else %}
+    <button class="seat active-seat">{{ seat }}</button>
+    {% endif %}
+    {% endfor %}
+  </div>
