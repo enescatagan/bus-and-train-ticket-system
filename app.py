@@ -11,7 +11,7 @@ for bus_ticket in bus_json:
     bus_tickets.append(bus_tick_obj)
 
 #tren data without compartments and seats https://api.npoint.io/6d3c5a8f8064dfbd6be3
-tren_json = requests.get("https://api.npoint.io/6bf62bd3840119596101").json()
+tren_json = requests.get("https://api.npoint.io/065aef5e4f5e883be8b4").json()
 train_tickets = []
 for train_ticket in tren_json:
     train_tick_obj = Train(train_ticket["id"], train_ticket["company"], train_ticket["departure"], train_ticket["destination"], train_ticket["date"], train_ticket["time"], train_ticket["fee"], train_ticket["compartments"], train_ticket["seats"])
