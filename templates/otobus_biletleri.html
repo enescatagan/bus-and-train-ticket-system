@@ -7,9 +7,10 @@
                 <!-- Article list -->
                 <section class="box article-list">
                     <h2 class="icon fa-file-alt">Uygun Biletler</h2>
-
+                    <div class="container">
                     {% for ticket in bus_tickets %}
                     <!-- Excerpt -->
+                    <div class="col-12-medium">
                     <article class="excerpt">
                         <a href="#" class="image left"><img src="static/images/pic04.jpg" alt="" /></a>
                         <div>
@@ -19,17 +20,15 @@
                                 <h3><a href="#">{{ ticket.company.title() }}<span>-- {{ ticket.fee }}</span></a></h3>
                             </header>
                             <a class="button alt">Koltuk Seç</a>
-                            <form method="POST">
-                                <select name="seat">
-                                    {% for seat in ticket.seats%}
-                                    <option value="{{ seat }}">{{ seat }}</option>
-                                    {% endfor %}
-                                </select>
-                            </form>
-                            {%include bus_seats.html%}
                         </div>
                     </article>
+                    </div>
+                    <div class="col-12-medium">
+                        {% include "bus_seats.html"%}
+
+                    </div>
                     {% endfor %}
+                    </div>
                 </section>
             </div>
         </div>

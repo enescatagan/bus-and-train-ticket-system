@@ -1,7 +1,9 @@
+<style>
+.seat {
+}
+</style>
 <div class="bus-seat-grid">
-  <button class="seat">1</button>
-  <button class="seat">2</button>
-  <button class="seat occupied">3</button>
-  <button class="seat">4</button>
-  <!-- Add more buttons for seats as needed -->
+    {% for i in range(1, 31) %}
+      <button class="seat">{{i}}</button>
+    {% endfor %}
 </div>
