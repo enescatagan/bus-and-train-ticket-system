@@ -18,14 +18,14 @@
                                 <span> <b> {{ ticket.departure.title() }} - {{ ticket.destination.title() }} </b></span>
                                 <h3><a href="#">{{ ticket.company.title() }}<span>-- {{ ticket.fee }}</span></a></h3>
                             </header>
-                                <form method="POST">
-                                    <select name="seat">
-                                        {% for seat in ticket.seats%}
-                                        <option value="{{ seat }}">{{ seat }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </form>
                             <a class="button alt">Koltuk Seç</a>
+                            <form method="POST">
+                                <select name="seat">
+                                    {% for seat in ticket.seats%}
+                                    <option value="{{ seat }}">{{ seat }}</option>
+                                    {% endfor %}
+                                </select>
+                            </form>
                         </div>
                     </article>
                     {% endfor %}
