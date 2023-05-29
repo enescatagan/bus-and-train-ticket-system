@@ -9,6 +9,7 @@
                     <h2 class="icon fa-file-alt">Uygun Biletler</h2>
 
                     <!-- Excerpt -->
+                    {% for train_ticket in train_tickets %}
                     <article class="excerpt">
                         <a href="#" class="image left"><img src="static/images/pic04.jpg" alt="" /></a>
                         <div>
@@ -20,32 +21,7 @@
                             <a class="button alt">Koltuk Seç</a>
                         </div>
                     </article>
-
-                    <!-- Excerpt -->
-                    <article class="excerpt">
-                        <a href="#" class="image left"><img src="static/images/pic05.jpg" alt="" /></a>
-                        <div>
-                            <header>
-                                <span class="date">18:00</span>
-                                <span> <b> İzmir - İstanbul </b></span>
-                                <h3><a href="#">TCDD<span>-- 80 TL</span></a></h3>
-                            </header>
-                            <a class="button alt">Koltuk Seç</a>
-                        </div>
-                    </article>
-
-                    <!-- Excerpt -->
-                    <article class="excerpt">
-                        <a href="#" class="image left"><img src="static/images/pic06.jpg" alt="" /></a>
-                        <div>
-                            <header>
-                                <span class="date">19:00</span>
-                                <span> <b> İzmir - İstanbul </b></span>
-                                <h3><a href="#">TCDD<span>-- 80 TL</span></a></h3>
-                            </header>
-                            <a class="button alt">Koltuk Seç</a>
-                        </div>
-                    </article>
+                    {% endfor %}
                 </section>
             </div>
         </div>
