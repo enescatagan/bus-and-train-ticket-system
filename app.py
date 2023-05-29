@@ -9,9 +9,11 @@ for bus_ticket in bus_json:
     bus_tick_obj = Bus(bus_ticket["id"], bus_ticket["company"], bus_ticket["departure"], bus_ticket["destination"], bus_ticket["date"], bus_ticket["time"], bus_ticket["fee"])
     bus_tickets.append(bus_tick_obj)
 
+tren_json = requests.get("https://api.npoint.io/6d3c5a8f8064dfbd6be3").json()
 train_tickets = []
-for train_ticket in train_tickets:
-    bus_tick_obj = Train(train_ticket["id"], train_ticket["company"], train_ticket["departure"], train_ticket["destination"], train_ticket["date"], train_ticket["time"], train_ticket["fee"])
+for train_ticket in tren_json:
+    train_tick_obj = Train(train_ticket["id"], train_ticket["company"], train_ticket["departure"], train_ticket["destination"], train_ticket["date"], train_ticket["time"], train_ticket["fee"])
+    train_tickets.append(train_tick_obj)
 
 app = Flask(__name__)
 
