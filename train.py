@@ -1,6 +1,6 @@
 class Train():
     """Train Tickets"""
-    def __init__(self, id, company, departure, destination, date, time, fee, seat_no) -> None:
+    def __init__(self, id, company, departure, destination, date, time, fee) -> None:
       self.id = id
       self.company = company
       self.departure = departure
@@ -8,4 +8,3 @@ class Train():
       self.date = date
       self.time = time
       self.fee = fee
-      self.seat_no = seat_no
