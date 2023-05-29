@@ -13,7 +13,7 @@
                         <a href="#" class="image left"><img src="static/images/pic04.jpg" alt="" /></a>
                         <div>
                             <header>
-                                {% for ticket in otobus_tickets %}
+                                {% for ticket in bus_tickets %}
                                 <span class="date">{{ ticket.date }}</span>
                                 <span> <b> {{ ticket.departure.title() }} - {{ ticket.destination.title() }} </b></span>
                                 <h3><a href="#">{{ ticket.company.title() }}<span>-- {{ ticket.fee }}</span></a></h3>

@@ -1,9 +1,13 @@
 from flask import Flask, render_template
+import requests
 from bus import Bus
 from train import Train
+
+bus_json = requests.get("https://api.npoint.io/3a22c5b61aa1f46639cb").json()
 bus_tickets = []
-for bus_ticket in bus_tickets:
+for bus_ticket in bus_json:
     bus_tick_obj = Bus(bus_ticket["id"], bus_ticket["company"], bus_ticket["departure"], bus_ticket["destination"], bus_ticket["date"], bus_ticket["time"], bus_ticket["fee"])
+    bus_tickets.append(bus_tick_obj)
 
 app = Flask(__name__)
 
