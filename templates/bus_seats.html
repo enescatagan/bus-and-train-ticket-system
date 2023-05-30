@@ -21,13 +21,13 @@
   }
 
   .active-seat {
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: #ffffff;
-    outline: none; 
+    outline: none;
   }
 
   .active-button:active {
-    background-color: #3D8D40;
+    background-color: #3d8d40;
   }
 
   .inactive-seat {
@@ -35,34 +35,44 @@
     color: #333333;
     pointer-events: none;
   }
-
+  .selected-seat {
+    background-color: darkslategray;
+  }
 </style>
 
 {% include "header.html" %}
 
 <div class="wrapper style3">
-    <div class="inner">
-        <div class="container">
-<form method="POST">
-  <select name="seat">
-    <option value="">Boş Koltuklar</option>
-    {% for seat in ticket.seats%}
-    <option value="{{ seat }}">{{ seat }}</option>
-    {% endfor %}
-  </select>
-</form>
-
-<div class="bus-seat-grid">
-  {% for seat in range(1, 31) %}
-  {% if seat not in ticket.seats %}
-  <button class="seat inactive-seat"> {{ seat }} </button>
-  {% else %}
-  <button class="seat active-seat">{{ seat }}</button>
-  {% endif %}
-  {% endfor %}
-</div>
-        </div>
+  <div class="inner">
+    <div class="container">
+      <form method="POST">
+        <select name="seat">
+          <option value="">Boş Koltuklar</option>
+          {% for seat in ticket.seats%}
+          <option value="{{ seat }}">{{ seat }}</option>
+          {% endfor %}
+        </select>
+      </form>
+      <div class="bus-seat-grid">
+        {% for seat in range(1, 31) %} {% if seat not in ticket.seats %}
+        <button class="seat inactive-seat">{{ seat }}</button>
+        {% else %}
+        <button onclick="addToTheCart(event)" class="seat active-seat">
+          {{ seat }}
+        </button>
+        {% endif %} {% endfor %}
+        <script>
+          var selectedTickets = []
+          function addToTheCart(event) {
+            var seatFee = {{ticket.fee.split(" ")[0]}};
+            event.target.classList.toggle('inactive-seat')
+            selectedTickets.push(event.target.textContent.trim())
+            console.log(selectedTickets)
+          }
+        </script>
+      </div>
     </div>
+  </div>
 </div>
 
 {% include "footer.html" %}
