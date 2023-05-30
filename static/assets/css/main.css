@@ -2685,3 +2685,80 @@ ol.default li {
     padding: 3em 0 1em 0;
   }
 }
+
+.form-label{
+  color:white;
+}
+
+#biletBul_container{
+  width:400px;
+  height:280px;
+  background-color:rgba(0, 0, 0, 0.808);
+  border-radius:  50px;
+  box-sizing: border-box;
+  padding-top:35px;
+  padding-left:15px;
+}
+
+.custom-select{
+  width: 200px;
+  height: 45px;
+  border-radius:8px;
+  border:solid #4a96c1;
+  border-width:1px;
+  background-color:white;
+  color:rgb(0, 0, 0);
+}
+
+.custom-date{
+  width:200px;
+  height: 45px;
+  border-radius:8px;
+  border:solid #4a96c1;
+  border-width:1px;
+  background-color:white;
+  color:rgb(0, 0, 0);
+}
+
+#biletAl_bg{
+  background: transparent url('http://assets.iceable.com/img/noise-transparent.png') repeat 0 0;
+  background-repeat: repeat;
+  /*animation: bg-animation .2s infinite;*/
+  opacity: .9;
+  visibility: visible;
+}
+
+@keyframes bg-animation {
+    0% { transform: translate(0,0) }
+    10% { transform: translate(-5%,-5%) }
+    20% { transform: translate(-10%,5%) }
+    30% { transform: translate(5%,-10%) }
+    40% { transform: translate(-5%,15%) }
+    50% { transform: translate(-10%,5%) }
+    60% { transform: translate(15%,0) }
+    70% { transform: translate(0,10%) }
+    80% { transform: translate(-15%,0) }
+    90% { transform: translate(10%,5%) }
+    100% { transform: translate(5%,0) }
+}
+}
+
+@keyframes bg-animation {
+    0% { transform: translate(0,0) }
+    10% { transform: translate(-5%,-5%) }
+    20% { transform: translate(-10%,5%) }
+    30% { transform: translate(5%,-10%) }
+    40% { transform: translate(-5%,15%) }
+    50% { transform: translate(-10%,5%) }
+    60% { transform: translate(15%,0) }
+    70% { transform: translate(0,10%) }
+    80% { transform: translate(-15%,0) }
+    90% { transform: translate(10%,5%) }
+    100% { transform: translate(5%,0) }
+}
+
+#btn{
+  width:200px;
+}
+
+
