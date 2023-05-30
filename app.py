@@ -4,7 +4,8 @@ from bus import Bus
 from train import Train
 
 #https://api.npoint.io/6bf62bd3840119596101
-bus_json = requests.get("https://api.npoint.io/d3cbff124991fc033373").json()
+#https://api.npoint.io/d3cbff124991fc033373
+bus_json = requests.get("https://api.npoint.io/a9e39f24ebf06a9a3cae").json()
 bus_tickets = []
 for bus_ticket in bus_json:
     bus_tick_obj = Bus(bus_ticket["id"], bus_ticket["company"], bus_ticket["departure"], bus_ticket["destination"], bus_ticket["date"], bus_ticket["time"], bus_ticket["fee"], bus_ticket["seats"])
@@ -13,7 +14,8 @@ for bus_ticket in bus_json:
 #tren data without compartments and seats https://api.npoint.io/6d3c5a8f8064dfbd6be3
 #https://api.npoint.io/065aef5e4f5e883be8b4
 #https://api.npoint.io/84164e811a25f16851e6
-tren_json = requests.get("https://api.npoint.io/84164e811a25f16851e6").json()
+#https://api.npoint.io/84164e811a25f16851e6
+tren_json = requests.get("https://api.npoint.io/d3cbff124991fc033373").json()
 train_tickets = []
 for train_ticket in tren_json:
     train_tick_obj = Train(train_ticket["id"], train_ticket["company"], train_ticket["departure"], train_ticket["destination"], train_ticket["date"], train_ticket["time"], train_ticket["fee"], train_ticket["compartments"], train_ticket["seats"])
@@ -37,9 +39,9 @@ turkiye_illeri = [
     "Bolu",
     "Burdur",
     "Bursa",
-    "Çanakkale",
-    "Çankırı",
-    "Çorum",
+    "Canakkale",
+    "Cankırı",
+    "Corum",
     "Denizli",
     "Diyarbakır",
     "Edirne",
@@ -54,8 +56,8 @@ turkiye_illeri = [
     "Hatay",
     "Isparta",
     "Mersin",
-    "İstanbul",
-    "İzmir",
+    "Istanbul",
+    "Izmir",
     "Kars",
     "Kastamonu",
     "Kayseri",
@@ -93,7 +95,7 @@ turkiye_illeri = [
     "Karaman",
     "Kırıkkale",
     "Batman",
-    "Şırnak",
+    "Sırnak",
     "Bartın",
     "Ardahan",
     "Iğdır",
@@ -119,6 +121,7 @@ def bus_search():
     journey = request.form.get('journey')
     selected_date = request.form.get('select-date')
     search = {'location': location, 'journey': journey, 'selected_date': selected_date}
+    search['selected_date'] = str(search['selected_date'])
     return render_template("bus_search.html", bus_tickets=bus_tickets, search=search)
 
 
