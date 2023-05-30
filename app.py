@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 from bus import Bus
 from train import Train
@@ -111,10 +111,19 @@ def home():
 def otobus():
     return render_template("otobus.html", iller=turkiye_illeri)
 
+@app.route('/bus_search', methods=["POST"])
+def bus_search():
+    location = request.form.get('location')
+    journey = request.form.get('journey')
+    selected_date = request.form.get('select-date')
+    search = {'location': location, 'journey': journey, 'selected_date': selected_date}
+    return render_template("bus_search.html", bus_tickets=bus_tickets, search=search)
+
+
+
 @app.route('/otobus_biletleri')
 def otobus_biletleri():
     return render_template("otobus_biletleri.html", bus_tickets=bus_tickets)
-
 
 @app.route('/tren')
 def tren():
