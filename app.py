@@ -2,16 +2,18 @@ from flask import Flask, render_template, request
 import requests
 from bus import Bus
 from train import Train
-#safdaf
-#bus data without seats https://api.npoint.io/3a22c5b61aa1f46639cb
-bus_json = requests.get("https://api.npoint.io/6bf62bd3840119596101").json()
+
+#https://api.npoint.io/6bf62bd3840119596101
+bus_json = requests.get("https://api.npoint.io/d3cbff124991fc033373").json()
 bus_tickets = []
 for bus_ticket in bus_json:
     bus_tick_obj = Bus(bus_ticket["id"], bus_ticket["company"], bus_ticket["departure"], bus_ticket["destination"], bus_ticket["date"], bus_ticket["time"], bus_ticket["fee"], bus_ticket["seats"])
     bus_tickets.append(bus_tick_obj)
 
 #tren data without compartments and seats https://api.npoint.io/6d3c5a8f8064dfbd6be3
-tren_json = requests.get("https://api.npoint.io/065aef5e4f5e883be8b4").json()
+#https://api.npoint.io/065aef5e4f5e883be8b4
+#https://api.npoint.io/84164e811a25f16851e6
+tren_json = requests.get("https://api.npoint.io/84164e811a25f16851e6").json()
 train_tickets = []
 for train_ticket in tren_json:
     train_tick_obj = Train(train_ticket["id"], train_ticket["company"], train_ticket["departure"], train_ticket["destination"], train_ticket["date"], train_ticket["time"], train_ticket["fee"], train_ticket["compartments"], train_ticket["seats"])
