@@ -59,9 +59,25 @@
 
   #total-amount {
     font-weight: bold;
-    margin: 10px;
+    margin-top: 10px;
     text-align: center;
   }
+
+  .selected-tickets-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .selected-tickets-wrapper {
+    width: 400px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
   .tooltip {
     position: relative;
     display: inline-block;
@@ -105,6 +121,16 @@
     border: 1px solid #ccc;
     border-radius: 3px;
   }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  #checkout-form {
+    margin-top: 20px;
+  }
 </style>
 
 {% include "header.html" %}
@@ -128,10 +154,14 @@
         </div>
       </div>
 
-      <div class="col-12-large" style="margin-left: 10%">
-        <div id="selected-tickets"></div>
-        <div id="total-amount"></div>
+      <div class="col-12-large" style="margin-left: auto">
+        <div class="selected-tickets-container">
+          <div id="selected-tickets" class="selected-tickets-wrapper"></div>
+          <div id="total-amount"></div>
+        </div>
       </div>
+
+      <div class="form-container"> 
       <form id="checkout-form" method="POST" style="margin-left: 20px">
         <div class="form-row">
           <label for="full-name" class="form-label">İsim Soyisim:</label>
@@ -147,6 +177,7 @@
           Satın Al
         </button>
       </form>
+      <div class="form-container"> 
     </div>
   </div>
 </div>
