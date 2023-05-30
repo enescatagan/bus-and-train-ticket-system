@@ -7,7 +7,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12-large">
-          <form action="#" method="get" id="form1">
+          <form action="otobus_biletleri" method="post" id="form1">
             <div id="biletBul_container">
               <table id="form_table">
                 <tr>
@@ -17,9 +17,9 @@
 
                   <td>
                     <select name="location" class="custom-select">
-                      <option value="Izmir">İzmir</option>
-                      <option value="Istanbul">Ankara</option>
-                      <option value="Ankara">İstanbul</option>
+                      {% for il in iller %}
+                      <option value="{{il}}">{{il}}</option>
+                      {% endfor %}
                     </select>
                   </td>
                 </tr>
@@ -31,8 +31,9 @@
 
                   <td>
                     <select name="journey" class="custom-select">
-                      <option value="Istanbul">Ankara</option>
-                      <option value="Ankara">İstanbul</option>
+                      {% for il in iller %}
+                      <option value="{{il}}">{{il}}</option>
+                      {% endfor %}
                     </select>
                   </td>
                 </tr>
@@ -68,7 +69,12 @@
                 <tr>
                   <td></td>
                   <td>
-                    <input type="submit" value="Otobüs Bileti Bul" id="btn" />
+                    <input
+                      href=""
+                      type="submit"
+                      value="Otobüs Bileti Bul"
+                      id="btn"
+                    />
                   </td>
                 </tr>
               </table>
