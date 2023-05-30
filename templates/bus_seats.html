@@ -91,7 +91,7 @@
     left: 50%;
     transform: translateX(-50%);
     padding: 5px;
-    background-color: #34363B;
+    background-color: #34363b;
     color: #fff;
     font-size: 12px;
     white-space: nowrap;
@@ -137,6 +137,21 @@
 
 <div class="wrapper style3">
   <div class="inner">
+    <div class="container">
+      <header>
+        <span class="date">{{ ticket.date }}</span>
+        <span>
+          <b>
+            {{ ticket.departure.title() }} - {{ ticket.destination.title() }}
+          </b></span
+        >
+        <h3>
+          <a href="#"
+            >{{ ticket.company.title() }}<span>-- {{ ticket.fee }}</span></a
+          >
+        </h3>
+      </header>
+    </div>
     <div class="container" style="display: flex">
       <div class="col-12-large">
         <div class="bus-seat-grid">
@@ -181,7 +196,6 @@
     </div>
   </div>
 </div>
-
 <script>
   var selectedTickets = [];
          var seatFee = {{ ticket.fee.split(" ")[0] }};
@@ -231,25 +245,5 @@
              totalAmountElement.textContent = 'Toplam Tutar: ' + totalAmount + ' TL';
            }
          }
-
-         function confirmPurchase(event) {
-          event.preventDefault();
-    var fullName = document.getElementById('full-name').value;
-    var age = parseInt(document.getElementById('age').value);
-
-    if (selectedTickets.length > 0 && fullName !== "" && age >= 18) {
-      // Process the purchase
-      alert("Satın alma işlemi başarıyla tamamlandı. İsim: " + fullName + ", Yaş: " + age + ", Koltuklar: " + selectedTickets);
-      alert("Toplam Ödemeniz gereken tutar: " + totalAmount)
-    } else {
-      if (selectedTickets.length === 0) {
-        alert("Lütfen bir koltuk seçin.");
-      } else if (fullName === "") {
-        alert("Lütfen isim soyisim bilgisini girin.");
-      } else {
-        alert("18 yaşından küçük kişiler bilet alamaz.");
-      }
-    }
-        }
 </script>
 {% include "footer.html" %}
