@@ -21,13 +21,13 @@
   }
 
   .active-seat {
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: #ffffff;
-    outline: none; 
+    outline: none;
   }
 
   .active-button:active {
-    background-color: #3D8D40;
+    background-color: #3d8d40;
   }
 
   .inactive-seat {
@@ -35,24 +35,117 @@
     color: #333333;
     pointer-events: none;
   }
+  .selected-seat {
+    background-color: darkslategray;
+  }
+  .ticket {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f2f2f2;
+    margin-bottom: 10px;
+  }
 
+  .seat-number {
+    font-weight: bold;
+    margin: 5px;
+  }
+
+  .ticket-cost {
+    color: #888;
+    margin: 5px;
+  }
+
+  #total-amount {
+    font-weight: bold;
+    margin: 10px;
+    text-align: center;
+  }
 </style>
 
-<form method="POST">
-  <select name="seat">
-    <option value="">Boş Koltuklar</option>
-    {% for seat in ticket.seats%}
-    <option value="{{ seat }}">{{ seat }}</option>
-    {% endfor %}
-  </select>
-</form>
+{% include "header.html" %}
 
-<div class="bus-seat-grid">
-  {% for seat in range(1, 31) %}
-  {% if seat not in ticket.seats %}
-  <button class="seat inactive-seat"> {{ seat }} </button>
-  {% else %}
-  <button class="seat active-seat">{{ seat }}</button>
-  {% endif %}
-  {% endfor %}
+<div class="wrapper style3">
+  <div class="inner">
+    <div class="container" style="display: flex">
+      <!--
+      <form method="POST">
+        <select name="seat">
+          <option value="">Boş Koltuklar</option>
+          {% for seat in ticket.seats%}
+          <option value="{{ seat }}">{{ seat }}</option>
+          {% endfor %}
+        </select>
+      </form>
+-->
+      <div class="col-12-large">
+        <div class="bus-seat-grid">
+          {% for seat in range(1, 31) %} {% if seat not in ticket.seats %}
+          <button class="seat inactive-seat">{{ seat }}</button>
+          {% else %}
+          <button onclick="addToTheCart(event)" class="seat active-seat">
+            {{ seat }}
+          </button>
+          {% endif %} {% endfor %}
+        </div>
+      </div>
+
+      <div class="col-12-large" style="margin-left: 10%">
+        <div id="selected-tickets"></div>
+        <div id="total-amount"></div>
+      </div>
+    </div>
+  </div>
 </div>
+<script>
+  var selectedTickets = [];
+         var seatFee = {{ ticket.fee.split(" ")[0] }};
+
+         function addToTheCart(event) {
+           event.target.classList.toggle('inactive-seat');
+           var seatNumber = parseInt(event.target.textContent.trim());
+
+           if (selectedTickets.includes(seatNumber)) {
+             selectedTickets = selectedTickets.filter(function (ticket) {
+               return ticket !== seatNumber;
+             });
+           } else {
+             selectedTickets.push(seatNumber);
+           }
+
+           // Update the selected tickets display
+           var selectedTicketsElement = document.getElementById('selected-tickets');
+           selectedTicketsElement.innerHTML = '';
+
+           var totalAmountElement = document.getElementById('total-amount');
+           totalAmountElement.textContent = '';
+
+           if (selectedTickets.length > 0) {
+             var totalAmount = 0;
+
+             for (var i = 0; i < selectedTickets.length; i++) {
+               var ticketDiv = document.createElement('div');
+               ticketDiv.classList.add('ticket');
+
+               var seatNumberElement = document.createElement('div');
+               seatNumberElement.classList.add('seat-number');
+               seatNumberElement.textContent = 'Koltuk: ' + selectedTickets[i];
+
+               var costElement = document.createElement('div');
+               costElement.classList.add('ticket-cost');
+               costElement.textContent = 'Fiyat: ' + seatFee + ' TL';
+
+               ticketDiv.appendChild(seatNumberElement);
+               ticketDiv.appendChild(costElement);
+
+               selectedTicketsElement.appendChild(ticketDiv);
+
+               totalAmount += seatFee;
+             }
+
+             totalAmountElement.textContent = 'Toplam Tutar: ' + totalAmount + ' TL';
+           }
+         }
+</script>
+{% include "footer.html" %}
