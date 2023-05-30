@@ -11,6 +11,7 @@
 
           <!-- Excerpt -->
           {% for ticket in train_tickets %}
+          {% if search['location'] == ticket.departure.title() and search['journey'] == ticket.destination.title() and search['selected_date'] == ticket.date %}
           <article class="excerpt">
             <a href="#" class="image left"
               ><img src="static/images/pic04.jpg" alt=""
@@ -39,6 +40,7 @@
               >
             </div>
           </article>
+          {% endif %}
           {% endfor %}
         </section>
       </div>

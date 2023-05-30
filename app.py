@@ -3,18 +3,12 @@ import requests
 from bus import Bus
 from train import Train
 
-#https://api.npoint.io/6bf62bd3840119596101
-#https://api.npoint.io/d3cbff124991fc033373
 bus_json = requests.get("https://api.npoint.io/a9e39f24ebf06a9a3cae").json()
 bus_tickets = []
 for bus_ticket in bus_json:
     bus_tick_obj = Bus(bus_ticket["id"], bus_ticket["company"], bus_ticket["departure"], bus_ticket["destination"], bus_ticket["date"], bus_ticket["time"], bus_ticket["fee"], bus_ticket["seats"])
     bus_tickets.append(bus_tick_obj)
 
-#tren data without compartments and seats https://api.npoint.io/6d3c5a8f8064dfbd6be3
-#https://api.npoint.io/065aef5e4f5e883be8b4
-#https://api.npoint.io/84164e811a25f16851e6
-#https://api.npoint.io/84164e811a25f16851e6
 tren_json = requests.get("https://api.npoint.io/d3cbff124991fc033373").json()
 train_tickets = []
 for train_ticket in tren_json:
@@ -124,12 +118,14 @@ def bus_search():
     search['selected_date'] = str(search['selected_date'])
     return render_template("bus_search.html", bus_tickets=bus_tickets, search=search)
 
+
 @app.route('/tren_search', methods=["POST"])
 def tren_search():
     location = request.form.get('location')
     journey = request.form.get('journey')
     selected_date = request.form.get('select-date')
     search = {'location': location, 'journey': journey, 'selected_date': selected_date}
+    search['selected_date'] = str(search['selected_date'])
     return render_template("tren_search.html", train_tickets=train_tickets, search=search)
 
 
