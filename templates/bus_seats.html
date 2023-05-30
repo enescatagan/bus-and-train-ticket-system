@@ -49,15 +49,18 @@
 
   .seat-number {
     font-weight: bold;
+    margin: 5px;
   }
 
   .ticket-cost {
     color: #888;
+    margin: 5px;
   }
 
   #total-amount {
     font-weight: bold;
-    margin-top: 10px;
+    margin: 10px;
+    text-align: center;
   }
 </style>
 
@@ -127,11 +130,11 @@
 
                var seatNumberElement = document.createElement('div');
                seatNumberElement.classList.add('seat-number');
-               seatNumberElement.textContent = 'Seat ' + selectedTickets[i];
+               seatNumberElement.textContent = 'Koltuk: ' + selectedTickets[i];
 
                var costElement = document.createElement('div');
                costElement.classList.add('ticket-cost');
-               costElement.textContent = 'Cost: ' + seatFee + ' USD';
+               costElement.textContent = 'Fiyat: ' + seatFee + ' TL';
 
                ticketDiv.appendChild(seatNumberElement);
                ticketDiv.appendChild(costElement);
@@ -141,7 +144,7 @@
                totalAmount += seatFee;
              }
 
-             totalAmountElement.textContent = 'Total Amount: ' + totalAmount + ' USD';
+             totalAmountElement.textContent = 'Toplam Tutar: ' + totalAmount + ' TL';
            }
          }
 </script>
