@@ -176,23 +176,39 @@
         </div>
       </div>
 
-      <div class="form-container"> 
-      <form id="checkout-form" method="POST" style="margin-left: 20px">
-        <div class="form-row">
-          <label for="full-name" class="form-label">İsim Soyisim:</label>
-          <input type="text" id="full-name" name="full-name" required class="form-input" />
-        </div>
-      
-        <div class="form-row">
-          <label for="age" class="form-label">Yaş:</label>
-          <input type="number" id="age" name="age" required class="form-input" />
-        </div>
-      
-        <button type="submit" onclick="confirmPurchase(event)" class="active-button">
-          Satın Al
-        </button>
-      </form>
-      <div class="form-container"> 
+      <div class="form-container">
+        <form id="checkout-form" method="POST" style="margin-left: 20px">
+          <div class="form-row">
+            <label for="full-name" class="form-label" style="color: gray">İsim Soyisim:</label>
+            <input
+              type="text"
+              id="full-name"
+              name="full-name"
+              required
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="age" class="form-label" style="color: gray">Yaş:</label>
+            <input
+              type="number"
+              id="age"
+              name="age"
+              required
+              class="form-input"
+            />
+          </div>
+
+          <button
+            type="submit"
+            onclick="confirmPurchase(event)"
+            class="active-button"
+          >
+            Satın Al
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -245,7 +261,7 @@
              totalAmountElement.textContent = 'Toplam Tutar: ' + totalAmount + ' TL';
            }
          }
-         
+
          function confirmPurchase(event) {
           event.preventDefault();
     var fullName = document.getElementById('full-name').value;
