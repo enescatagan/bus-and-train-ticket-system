@@ -60,6 +60,33 @@
     margin: 10px;
     text-align: center;
   }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .tooltip::after {
+    content: attr(tooltip-data);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    background-color: #34363b;
+    color: #fff;
+    font-size: 12px;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+  }
+
+  .tooltip:hover::after {
+    visibility: visible;
+    opacity: 1;
+  }
 </style>
 {% include "header.html" %}
 
@@ -71,7 +98,11 @@
           {% for seat in range(1, 52) %} {% if seat not in ticket.seats %}
           <button class="seat inactive-seat">{{ seat }}</button>
           {% else %}
-          <button onclick="addToTheCart(event)" class="seat active-seat">
+          <button
+            tooltip-data="{{ticket.fee}}"
+            onclick="addToTheCart(event)"
+            class="tooltip seat active-seat"
+          >
             {{ seat }}
           </button>
           {% endif %} {% endfor %}
