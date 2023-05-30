@@ -33,9 +33,11 @@
     color: #333333;
     pointer-events: none;
   }
+
   .selected-seat {
     background-color: darkslategray;
   }
+
   .ticket {
     display: flex;
     align-items: center;
@@ -57,8 +59,23 @@
 
   #total-amount {
     font-weight: bold;
-    margin: 10px;
+    margin-top: 10px;
     text-align: center;
+  }
+
+  .selected-tickets-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .selected-tickets-wrapper {
+    width: 400px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-bottom: 20px;
   }
 
   .tooltip {
@@ -104,6 +121,16 @@
     border: 1px solid #ccc;
     border-radius: 3px;
   }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  #checkout-form {
+    margin-top: 20px;
+  }
 </style>
 {% include "header.html" %}
 
@@ -115,89 +142,91 @@
           {% for seat in range(1, 52) %} {% if seat not in ticket.seats %}
           <button class="seat inactive-seat">{{ seat }}</button>
           {% else %}
-          <button
-            tooltip-data="{{ticket.fee}}"
-            onclick="addToTheCart(event)"
-            class="tooltip seat active-seat"
-          >
+          <button tooltip-data="{{ticket.fee}}" onclick="addToTheCart(event)" class="tooltip seat active-seat">
             {{ seat }}
           </button>
           {% endif %} {% endfor %}
         </div>
       </div>
-      <div class="col-12-large" style="margin-left: 10%">
-        <div id="selected-tickets"></div>
-        <div id="total-amount"></div>
+
+      <div class="col-12-large" style="margin-left: auto">
+        <div class="selected-tickets-container">
+          <div id="selected-tickets" class="selected-tickets-wrapper"></div>
+          <div id="total-amount"></div>
+        </div>
       </div>
-      <form id="checkout-form" method="POST" style="margin-left: 20px">
-        <div class="form-row">
-          <label for="full-name" class="form-label">İsim Soyisim:</label>
-          <input type="text" id="full-name" name="full-name" required class="form-input" />
-        </div>
-      
-        <div class="form-row">
-          <label for="age" class="form-label">Yaş:</label>
-          <input type="number" id="age" name="age" required class="form-input" />
-        </div>
-      
-        <button type="submit" onclick="confirmPurchase(event)" class="active-button">
-          Satın Al
-        </button>
-      </form>
+
+      <div class="form-container">        
+        <form id="checkout-form" method="POST" style="margin-left: 20px">
+          <div class="form-row">
+            <label for="full-name" class="form-label">İsim Soyisim:</label>
+            <input type="text" id="full-name" name="full-name" required class="form-input" />
+          </div>
+
+          <div class="form-row">
+            <label for="age" class="form-label">Yaş:</label>
+            <input type="number" id="age" name="age" required class="form-input" />
+          </div>
+
+          <button type="submit" onclick="confirmPurchase(event)" class="active-button">
+            Satın Al
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
   var selectedTickets = [];
-         var seatFee = {{ ticket.fee.split(" ")[0] }};
+  var seatFee = {{ ticket.fee.split(" ")[0] }};
 
-         function addToTheCart(event) {
-           event.target.classList.toggle('inactive-seat');
-           var seatNumber = parseInt(event.target.textContent.trim());
+  function addToTheCart(event) {
+    event.target.classList.toggle('inactive-seat');
+    var seatNumber = parseInt(event.target.textContent.trim());
 
-           if (selectedTickets.includes(seatNumber)) {
-             selectedTickets = selectedTickets.filter(function (ticket) {
-               return ticket !== seatNumber;
-             });
-           } else {
-             selectedTickets.push(seatNumber);
-           }
+    if (selectedTickets.includes(seatNumber)) {
+      selectedTickets = selectedTickets.filter(function (ticket) {
+        return ticket !== seatNumber;
+      });
+    } else {
+      selectedTickets.push(seatNumber);
+    }
 
-           var selectedTicketsElement = document.getElementById('selected-tickets');
-           selectedTicketsElement.innerHTML = '';
+    var selectedTicketsElement = document.getElementById('selected-tickets');
+    selectedTicketsElement.innerHTML = '';
 
-           var totalAmountElement = document.getElementById('total-amount');
-           totalAmountElement.textContent = '';
+    var totalAmountElement = document.getElementById('total-amount');
+    totalAmountElement.textContent = '';
 
-           if (selectedTickets.length > 0) {
-             var totalAmount = 0;
+    if (selectedTickets.length > 0) {
+      var totalAmount = 0;
 
-             for (var i = 0; i < selectedTickets.length; i++) {
-               var ticketDiv = document.createElement('div');
-               ticketDiv.classList.add('ticket');
+      for (var i = 0; i < selectedTickets.length; i++) {
+        var ticketDiv = document.createElement('div');
+        ticketDiv.classList.add('ticket');
 
-               var seatNumberElement = document.createElement('div');
-               seatNumberElement.classList.add('seat-number');
-               seatNumberElement.textContent = 'Koltuk: ' + selectedTickets[i];
+        var seatNumberElement = document.createElement('div');
+        seatNumberElement.classList.add('seat-number');
+        seatNumberElement.textContent = 'Koltuk: ' + selectedTickets[i];
 
-               var costElement = document.createElement('div');
-               costElement.classList.add('ticket-cost');
-               costElement.textContent = 'Fiyat: ' + seatFee + ' TL';
+        var costElement = document.createElement('div');
+        costElement.classList.add('ticket-cost');
+        costElement.textContent = 'Fiyat: ' + seatFee + ' TL';
 
-               ticketDiv.appendChild(seatNumberElement);
-               ticketDiv.appendChild(costElement);
+        ticketDiv.appendChild(seatNumberElement);
+        ticketDiv.appendChild(costElement);
 
-               selectedTicketsElement.appendChild(ticketDiv);
+        selectedTicketsElement.appendChild(ticketDiv);
 
-               totalAmount += seatFee;
-             }
+        totalAmount += seatFee;
+      }
 
-             totalAmountElement.textContent = 'Toplam Tutar: ' + totalAmount + ' TL';
-           }
-         }
-         function confirmPurchase(event) {
-          event.preventDefault();
+      totalAmountElement.textContent = 'Toplam Tutar: ' + totalAmount + ' TL';
+    }
+  }
+  function confirmPurchase(event) {
+    event.preventDefault();
     var fullName = document.getElementById('full-name').value;
     var age = parseInt(document.getElementById('age').value);
 
@@ -213,6 +242,6 @@
         alert("18 yaşından küçük kişiler bilet alamaz.");
       }
     }
-        }
+  }
 </script>
 {% include "footer.html" %}
