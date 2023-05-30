@@ -38,13 +38,34 @@
   .selected-seat {
     background-color: darkslategray;
   }
+  .ticket {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f2f2f2;
+    margin-bottom: 10px;
+  }
+
+  .seat-number {
+    font-weight: bold;
+  }
+
+  .ticket-cost {
+    color: #888;
+  }
+
+  #total-amount {
+    font-weight: bold;
+    margin-top: 10px;
+  }
 </style>
 
 {% include "header.html" %}
 
 <div class="wrapper style3">
   <div class="inner">
-    <div class="container" style="display: flex;">
+    <div class="container" style="display: flex">
       <!--
       <form method="POST">
         <select name="seat">
@@ -67,7 +88,7 @@
         </div>
       </div>
 
-      <div class="col-12-large" style="margin-left: 10%;">
+      <div class="col-12-large" style="margin-left: 10%">
         <div id="selected-tickets"></div>
         <div id="total-amount"></div>
       </div>
@@ -76,48 +97,52 @@
 </div>
 <script>
   var selectedTickets = [];
-  var seatFee = {{ ticket.fee.split(" ")[0] }};
+         var seatFee = {{ ticket.fee.split(" ")[0] }};
 
-  function addToTheCart(event) {
-    event.target.classList.toggle('inactive-seat');
-    var seatNumber = parseInt(event.target.textContent.trim());
+         function addToTheCart(event) {
+           event.target.classList.toggle('inactive-seat');
+           var seatNumber = parseInt(event.target.textContent.trim());
 
-    if (selectedTickets.includes(seatNumber)) {
-      selectedTickets = selectedTickets.filter(function (ticket) {
-        return ticket !== seatNumber;
-      });
-    } else {
-      selectedTickets.push(seatNumber);
-    }
+           if (selectedTickets.includes(seatNumber)) {
+             selectedTickets = selectedTickets.filter(function (ticket) {
+               return ticket !== seatNumber;
+             });
+           } else {
+             selectedTickets.push(seatNumber);
+           }
 
-    // Update the selected tickets display
-    var selectedTicketsElement = document.getElementById('selected-tickets');
-    selectedTicketsElement.innerHTML = '';
+           // Update the selected tickets display
+           var selectedTicketsElement = document.getElementById('selected-tickets');
+           selectedTicketsElement.innerHTML = '';
 
-    var totalAmountElement = document.getElementById('total-amount');
-    totalAmountElement.textContent = '';
+           var totalAmountElement = document.getElementById('total-amount');
+           totalAmountElement.textContent = '';
 
-    if (selectedTickets.length > 0) {
-      var table = document.createElement('table');
-      table.classList.add('ticket-table');
+           if (selectedTickets.length > 0) {
+             var totalAmount = 0;
 
-      var totalAmount = 0;
+             for (var i = 0; i < selectedTickets.length; i++) {
+               var ticketDiv = document.createElement('div');
+               ticketDiv.classList.add('ticket');
 
-      for (var i = 0; i < selectedTickets.length; i++) {
-        var row = table.insertRow(i);
+               var seatNumberElement = document.createElement('div');
+               seatNumberElement.classList.add('seat-number');
+               seatNumberElement.textContent = 'Seat ' + selectedTickets[i];
 
-        var seatCell = row.insertCell(0);
-        seatCell.textContent = 'Koltuk: ' + selectedTickets[i];
+               var costElement = document.createElement('div');
+               costElement.classList.add('ticket-cost');
+               costElement.textContent = 'Cost: ' + seatFee + ' USD';
 
-        var costCell = row.insertCell(1);
-        costCell.textContent = 'Fiyat: ' + seatFee + ' TL';
+               ticketDiv.appendChild(seatNumberElement);
+               ticketDiv.appendChild(costElement);
 
-        totalAmount += seatFee;
-      }
+               selectedTicketsElement.appendChild(ticketDiv);
 
-      selectedTicketsElement.appendChild(table);
-      totalAmountElement.textContent = 'Toplam Tutar: ' + totalAmount + ' TL';
-    }
-  }
+               totalAmount += seatFee;
+             }
+
+             totalAmountElement.textContent = 'Total Amount: ' + totalAmount + ' USD';
+           }
+         }
 </script>
 {% include "footer.html" %}
