@@ -121,6 +121,13 @@ def bus_search():
     search = {'location': location, 'journey': journey, 'selected_date': selected_date}
     return render_template("bus_search.html", bus_tickets=bus_tickets, search=search)
 
+@app.route('/tren_search', methods=["POST"])
+def tren_search():
+    location = request.form.get('location')
+    journey = request.form.get('journey')
+    selected_date = request.form.get('select-date')
+    search = {'location': location, 'journey': journey, 'selected_date': selected_date}
+    return render_template("tren_search.html", train_tickets=train_tickets, search=search)
 
 
 @app.route('/otobus_biletleri')
