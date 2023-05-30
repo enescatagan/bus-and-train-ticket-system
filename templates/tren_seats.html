@@ -87,6 +87,23 @@
     visibility: visible;
     opacity: 1;
   }
+
+  .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .form-label {
+    margin-right: 10px;
+  }
+
+  .form-input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
 </style>
 {% include "header.html" %}
 
@@ -112,6 +129,21 @@
         <div id="selected-tickets"></div>
         <div id="total-amount"></div>
       </div>
+      <form id="checkout-form" method="POST" style="margin-left: 20px">
+        <div class="form-row">
+          <label for="full-name" class="form-label">İsim Soyisim:</label>
+          <input type="text" id="full-name" name="full-name" required class="form-input" />
+        </div>
+      
+        <div class="form-row">
+          <label for="age" class="form-label">Yaş:</label>
+          <input type="number" id="age" name="age" required class="form-input" />
+        </div>
+      
+        <button type="submit" onclick="confirmPurchase(event)" class="active-button">
+          Satın Al
+        </button>
+      </form>
     </div>
   </div>
 </div>
@@ -164,5 +196,23 @@
              totalAmountElement.textContent = 'Toplam Tutar: ' + totalAmount + ' TL';
            }
          }
+         function confirmPurchase(event) {
+          event.preventDefault();
+    var fullName = document.getElementById('full-name').value;
+    var age = parseInt(document.getElementById('age').value);
+
+    if (selectedTickets.length > 0 && fullName !== "" && age >= 18) {
+      // Process the purchase
+      alert("Satın alma işlemi başarıyla tamamlandı. İsim: " + fullName + ", Yaş: " + age + ", Koltuklar: " + selectedTickets);
+    } else {
+      if (selectedTickets.length === 0) {
+        alert("Lütfen bir koltuk seçin.");
+      } else if (fullName === "") {
+        alert("Lütfen isim soyisim bilgisini girin.");
+      } else {
+        alert("18 yaşından küçük kişiler bilet alamaz.");
+      }
+    }
+        }
 </script>
 {% include "footer.html" %}

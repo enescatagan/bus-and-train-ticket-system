@@ -88,6 +88,23 @@
     visibility: visible;
     opacity: 1;
   }
+
+  .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .form-label {
+    margin-right: 10px;
+  }
+
+  .form-input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
 </style>
 
 {% include "header.html" %}
@@ -130,6 +147,21 @@
         <div id="selected-tickets"></div>
         <div id="total-amount"></div>
       </div>
+      <form id="checkout-form" method="POST" style="margin-left: 20px">
+        <div class="form-row">
+          <label for="full-name" class="form-label">İsim Soyisim:</label>
+          <input type="text" id="full-name" name="full-name" required class="form-input" />
+        </div>
+      
+        <div class="form-row">
+          <label for="age" class="form-label">Yaş:</label>
+          <input type="number" id="age" name="age" required class="form-input" />
+        </div>
+      
+        <button type="submit" onclick="confirmPurchase(event)" class="active-button">
+          Satın Al
+        </button>
+      </form>
     </div>
   </div>
 </div>
