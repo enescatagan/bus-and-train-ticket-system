@@ -99,7 +99,7 @@
         <span class="date">{{ ticket.date }}</span>
         <span>
           <b>
-            {{ ticket.departure.title() }} <span></span> {{ ticket.destination.title() }}
+            {{ ticket.departure.title() }} - {{ ticket.destination.title() }}
           </b></span
         >
         <h3>
@@ -130,25 +130,9 @@
         <div id="selected-tickets"></div>
         <div id="total-amount"></div>
       </div>
-      <form id="checkout-form" method="POST" style="margin-left: 20px;">
-        <div style="display: flex; align-items: center; margin-bottom: 10px;">
-          <label for="full-name" style="margin-right: 10px;">İsim Soyisim:</label>
-          <input type="text" id="full-name" name="full-name" required style="flex: 1;">
-        </div>
-      
-        <div style="display: flex; align-items: center; margin-bottom: 10px;">
-          <label for="age" style="margin-right: 10px;">Yaş:</label>
-          <input type="number" id="age" name="age" required style="flex: 1;">
-        </div>
-      
-        <button type="submit" onclick="confirmPurchase(event)" class="active-button">
-          Satın Al
-        </button>
-      </form>
     </div>
   </div>
 </div>
-
 <script>
   var selectedTickets = [];
          var seatFee = {{ ticket.fee.split(" ")[0] }};
@@ -198,25 +182,5 @@
              totalAmountElement.textContent = 'Toplam Tutar: ' + totalAmount + ' TL';
            }
          }
-
-         function confirmPurchase(event) {
-          event.preventDefault();
-    var fullName = document.getElementById('full-name').value;
-    var age = parseInt(document.getElementById('age').value);
-
-    if (selectedTickets.length > 0 && fullName !== "" && age >= 18) {
-      // Process the purchase
-      alert("Satın alma işlemi başarıyla tamamlandı. İsim: " + fullName + ", Yaş: " + age + ", Koltuklar: " + selectedTickets);
-      alert("Toplam Ödemeniz gereken tutar: " + totalAmount)
-    } else {
-      if (selectedTickets.length === 0) {
-        alert("Lütfen bir koltuk seçin.");
-      } else if (fullName === "") {
-        alert("Lütfen isim soyisim bilgisini girin.");
-      } else {
-        alert("18 yaşından küçük kişiler bilet alamaz.");
-      }
-    }
-        }
 </script>
 {% include "footer.html" %}
