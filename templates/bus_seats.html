@@ -245,5 +245,25 @@
              totalAmountElement.textContent = 'Toplam Tutar: ' + totalAmount + ' TL';
            }
          }
+         
+         function confirmPurchase(event) {
+          event.preventDefault();
+    var fullName = document.getElementById('full-name').value;
+    var age = parseInt(document.getElementById('age').value);
+
+    if (selectedTickets.length > 0 && fullName !== "" && age >= 18) {
+      // Process the purchase
+      alert("Satın alma işlemi başarıyla tamamlandı. İsim: " + fullName + ", Yaş: " + age + ", Koltuklar: " + selectedTickets);
+      alert("Toplam Ödemeniz gereken tutar: " + totalAmount)
+    } else {
+      if (selectedTickets.length === 0) {
+        alert("Lütfen bir koltuk seçin.");
+      } else if (fullName === "") {
+        alert("Lütfen isim soyisim bilgisini girin.");
+      } else {
+        alert("18 yaşından küçük kişiler bilet alamaz.");
+      }
+    }
+        }
 </script>
 {% include "footer.html" %}
