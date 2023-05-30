@@ -1,7 +1,139 @@
+<!-- <style>
+  #biletBul_container {
+    width: 400px;
+    height: 250px;
+    background-color: rgba(0, 0, 0, 0.801);
+    border-radius: 50px;
+    box-sizing: border-box;
+    padding-top: 35px;
+    padding-left: 15px;
+  }
+
+  .form-label {
+    font-size: 25px;
+    color: lightgray;
+  }
+
+  .custom-select {
+    width: 200px;
+    padding-left: 5px;
+    padding-top: 7px;
+    padding-right: 5px;
+    padding-bottom: 7px;
+    border-radius: 8px;
+    border: solid rgba(0, 128, 0, 0.3);
+    border-width: 1px;
+    background-color: rgba(211, 211, 211, 0.1);
+    color: lightgray;
+  }
+
+  .custom-date {
+    width: 189px;
+    padding-left: 5px;
+    padding-top: 7px;
+    padding-right: 5px;
+    padding-bottom: 7px;
+    border-radius: 8px;
+    border: solid rgba(0, 128, 0, 0.3);
+    border-width: 1px;
+    background-color: rgba(211, 211, 211, 0.1);
+    color: lightgray;
+  }
+
+  #btn {
+    color: lightgray;
+    background-color: #1ccc5a7a;
+    border-color: transparent;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    font-size: 17px;
+  }
+
+  #btn:hover {
+    color: #1ccc5a;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+</style> -->
 {% include "header.html" %}
 
 <!--TODO: Otobüs Bileti Arama-->
 
-{% include "main.html" %}
+<div class="wrapper style3">
+  <div class="inner">
+    <div class="container">
+      <div class="row">
+        <div class="col-12-large">
+          <form action="#" method="get" id="form1">
+            <div id="biletBul_container">
+              <table id="form_table">
+                <tr>
+                  <td>
+                    <label for="location" class="form-label">Nereden: </label>
+                  </td>
 
+                  <td>
+                    <select name="location" class="custom-select">
+                      <option value="Izmir">İzmir</option>
+                      <option value="Istanbul">Ankara</option>
+                      <option value="Ankara">İstanbul</option>
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <label for="journey" class="form-label">Nereye: </label>
+                  </td>
+
+                  <td>
+                    <select name="journey" class="custom-select">
+                      <option value="Istanbul">Ankara</option>
+                      <option value="Ankara">İstanbul</option>
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <label for="date" class="form-label">Gidiş Tarihi: </label>
+                  </td>
+
+                  <td>
+                    <input
+                      type="date"
+                      class="custom-date"
+                      name="select-date"
+                      value="2023-05-29"
+                      min="2023-05-29"
+                      max="2023-06-15"
+                      style="
+                        width: 215px;
+                        padding-left: 5px;
+                        padding-top: 7px;
+                        padding-right: 5px;
+                        padding-bottom: 7px;
+                        border-radius: 8px;
+                        border: solid transparent;
+                        border-width: 1px;
+                        background-color: #efefef;
+                      "
+                    />
+                  </td>
+                </tr>
+
+                <tr>
+                  <td></td>
+                  <td>
+                    <input type="submit" value="Otobüs Bileti Bul" id="btn" />
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% include "footer.html" %}
