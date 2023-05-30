@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import requests
 from bus import Bus
 from train import Train
-
+#safdaf
 #bus data without seats https://api.npoint.io/3a22c5b61aa1f46639cb
 bus_json = requests.get("https://api.npoint.io/6bf62bd3840119596101").json()
 bus_tickets = []
